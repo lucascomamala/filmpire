@@ -4,10 +4,10 @@ import { Link } from "react-router-dom"
 import { useTheme } from "@mui/styles"
 import { useDispatch, useSelector } from "react-redux"
 
-import { selectGenreOrCategory } from "../state/currentGenreOrCategory"
 import useStyles from "./styles"
-import { useGetGenresQuery } from "../services/TMDB"
 import genreIcons from "../assets/genres"
+import { useGetGenresQuery } from "../services/TMDB"
+import { selectGenreOrCategory } from "../state/currentGenreOrCategory"
 
 const categories = [
   { label: 'Popular', value: 'popular' },
@@ -23,6 +23,7 @@ const Sidebar = () => {
   const classes = useStyles()
   const { data, isLoading } = useGetGenresQuery()
   const dispatch = useDispatch()
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory)
 
   return (
     <>
