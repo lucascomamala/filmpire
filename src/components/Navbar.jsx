@@ -10,7 +10,7 @@ import { Sidebar } from "./index"
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles()
-  const isMobile = useMediaQuery('(max-width: 992px)')
+  const isMobile = useMediaQuery('(max-width: 1200px)')
   const theme = useTheme()
   const isAuthenticated = true
 
