@@ -1,5 +1,6 @@
 {
   "name": "filmpire",
+  "author": "Lucas Comamala",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
