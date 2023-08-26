@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom"
 
 import useStyles from "./styles"
 
-import { Actors, Movies, MovieInformation, Profile } from "./pages"
-import { Navbar } from "./components"
+import { Actors, Movies, MovieInformation, Profile } from "./pages/index"
+import { Navbar } from "./components/index"
 
 
 const App = () => {
