@@ -4,19 +4,13 @@ import { Link } from "react-router-dom"
 import { useTheme } from "@mui/styles"
 
 import useStyles from "./styles"
+import { useGetGenresQuery } from "../state/TMDB"
+import genreIcons from "../assets/genres"
 
 const categories = [
   { label: 'Popular', value: 'popular' },
   { label: 'Top Rated', value: 'top_rated' },
   { label: 'Upcoming', value: 'upcoming' },
-]
-
-const demoGenres = [
-  { label: 'Action', value: 'action' },
-  { label: 'Adventure', value: 'adventure' },
-  { label: 'Animation', value: 'animation' },
-  { label: 'Comedy', value: 'comedy' },
-  { label: 'Crime', value: 'crime' },
 ]
 
 const redLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
@@ -25,6 +19,7 @@ const blueLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48
 const Sidebar = () => {
   const theme = useTheme()
   const classes = useStyles()
+  const { data, isLoading } = useGetGenresQuery()
 
   return (
     <>
@@ -49,7 +44,7 @@ const Sidebar = () => {
           >
             <ListItemButton onClick={() => { }}>
               <ListItemIcon>
-                <img src={redLogo} className={classes.genreImage} height={30} />
+                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImage} height={30} />
               </ListItemIcon>
               <ListItemText primary={label} />
             </ListItemButton>
@@ -59,17 +54,21 @@ const Sidebar = () => {
       <Divider />
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {demoGenres.map(({ label, value }) => (
+        {isLoading ? (
+          <Box display='flex' justifyContent='center'>
+            <CircularProgress />
+          </Box>
+        ) : data.genres.map(({ name, id }) => (
           <Link
-            key={value}
+            key={name}
             to={`/`}
             className={classes.links}
           >
             <ListItemButton onClick={() => { }}>
               <ListItemIcon>
-                <img src={redLogo} className={classes.genreImage} height={30} />
+                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} />
               </ListItemIcon>
-              <ListItemText primary={label} />
+              <ListItemText primary={name} />
             </ListItemButton>
           </Link>
         ))}

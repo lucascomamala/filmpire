@@ -26,7 +26,6 @@ const Movies = () => {
     </Box>
   )
 
-  console.log(data)
   return (
     <MovieList movies={data} />
   )
