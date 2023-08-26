@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Box, CircularProgress, useMediaQuery, Typography } from "@mui/material"
 import { useSelector } from "react-redux"
 
-import { useGetMoviesQuery } from "../../state/TMDB"
+import { useGetMoviesQuery } from "../../services/TMDB"
 import MovieList from "./MovieList"
 
 const Movies = () => {
