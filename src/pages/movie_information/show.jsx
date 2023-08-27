@@ -16,7 +16,7 @@ const MovieInformation = () => {
   const { data, error, isLoading } = useGetMovieQuery(id);
   const classes = useStyles();
   const dispatch = useDispatch()
-  
+
   if (isLoading) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <CircularProgress size='8rem' />
@@ -67,6 +67,36 @@ const MovieInformation = () => {
             </Link>
           ))}
         </Grid>
+
+        <Typography variant="h5" gutterBottom style={{ marginTop: '20px' }}>Overview</Typography>
+        <Typography style={{ marginBottom: '2rem' }}>{data?.overview}</Typography>
+        <Typography variant="h5" gutterBottom>Top Cast</Typography>
+        <Grid item container spacing={1}>
+          {data && data?.credits?.cast?.map((character, i) => (
+            character.profile_path && (
+              <Grid
+                key={i}
+                item
+                xs={4}
+                sm={2}
+                component={Link}
+                to={`/actors/${character.id}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <img
+                  className={classes.castImage}
+                  src={`https://image.tmdb.org/t/p/w500/${character.profile_path}`}
+                  alt={character.name}
+                />
+                <Typography color="textPrimary" align="center">{character?.name}</Typography>
+                <Typography color="textSecondary" align="center">
+                  {character.character.split('/')[0]}
+                </Typography>
+              </Grid>
+            )
+          )).slice(0, 6)}
+        </Grid>
+
       </Grid>
     </Grid>
   )
