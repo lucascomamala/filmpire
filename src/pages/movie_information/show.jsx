@@ -17,6 +17,12 @@ const MovieInformation = () => {
   const classes = useStyles();
   const dispatch = useDispatch()
 
+  const isMovieFavorited = true
+  const isMovieWatchlisted = true
+
+  const addToFavorites = () => {}
+  const addToWatchList = () => {}
+
   if (isLoading) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <CircularProgress size='8rem' />
@@ -67,7 +73,6 @@ const MovieInformation = () => {
             </Link>
           ))}
         </Grid>
-
         <Typography variant="h5" gutterBottom style={{ marginTop: '20px' }}>Overview</Typography>
         <Typography style={{ marginBottom: '2rem' }}>{data?.overview}</Typography>
         <Typography variant="h5" gutterBottom>Top Cast</Typography>
@@ -95,6 +100,33 @@ const MovieInformation = () => {
               </Grid>
             )
           )).slice(0, 6)}
+        </Grid>
+
+        <Grid item container style={{ marginTop: '2rem' }}>
+          <div className={classes.buttonContainer}>
+            <Grid item xs={12} sm={6} className={classes.buttonContainer}>
+              <ButtonGroup size="small" variant="outlined">
+                <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>Website</Button>
+                <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>IMDB</Button>
+                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>Trailer</Button>
+              </ButtonGroup>
+            </Grid>
+            <Grid item xs={12} sm={6} className={classes.buttonContainer}>
+              <ButtonGroup size="small" variant="outlined">
+                <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
+                  {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
+                </Button>
+                <Button onClick={addToWatchList} endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}>
+                  Watchlist
+                </Button>
+                <Button endIcon={<ArrowBack />} sx={{ borderColor: 'primary.main' }}>
+                  <Typography variant="subtitle2" component={Link} to="/" color="inherit" sx={{ textDecoration: 'none' }}>
+                    Back
+                  </Typography>
+                </Button>
+              </ButtonGroup>
+            </Grid>
+          </div>
         </Grid>
 
       </Grid>
