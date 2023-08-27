@@ -128,8 +128,15 @@ const MovieInformation = () => {
             </Grid>
           </div>
         </Grid>
-
       </Grid>
+      <Box marginTop="5rem" width="100%">
+        <Typography variant="h3" gutterBottom align="center">
+          You might also like
+        </Typography>
+        {recommendations
+          ? <MovieList movies={recommendations} numberOfMovies={12} />
+          : <Box>Sorry, nothing was found.</Box>}
+      </Box>
     </Grid>
   )
 }
