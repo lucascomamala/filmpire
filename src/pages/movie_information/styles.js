@@ -60,4 +60,17 @@ export default makeStyles((theme) => ({
       alignItems: 'center',
     },
   },
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  video: {
+    width: '60%',
+    height: '60%',
+    [theme.breakpoints.down('sm')]: {
+      width: '90%',
+      height: '90%',
+    },
+  },
 }));
