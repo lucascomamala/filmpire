@@ -15,7 +15,8 @@ const MovieInformation = () => {
   const { id } = useParams();
   const { data, error, isLoading } = useGetMovieQuery(id);
   const classes = useStyles();
-
+  const dispatch = useDispatch()
+  
   if (isLoading) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <CircularProgress size='8rem' />
@@ -30,14 +31,14 @@ const MovieInformation = () => {
 
   return (
     <Grid container className={classes.containerSpaceAround}>
-      <Grid item md={12} lg={4} align="center">
+      <Grid item sm={12} md={4} align="center">
         <img
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
           className={classes.poster}
           alt={data?.title}
         />
       </Grid>
-      <Grid item container direction="column" lg={7}>
+      <Grid item container direction="column" md={7}>
         <Typography variant="h3" align="center" gutterBottom>
           {data?.title} ({data.release_date.split('-')[0]})
         </Typography>
@@ -59,7 +60,7 @@ const MovieInformation = () => {
               className={classes.links}
               key={genre.name}
               to="/"
-              onClick={() => { }}
+              onClick={() => dispatch(selectGenreOrCategory(genre.id))}
             >
               <img src={genreIcons[genre.name.toLowerCase()]} className={classes.genreImage} height={30} />
               <Typography color="textPrimary" variant="subtitle1">{genre?.name}</Typography>

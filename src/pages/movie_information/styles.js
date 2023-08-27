@@ -14,19 +14,18 @@ export default makeStyles((theme) => ({
     borderRadius: '20px',
     boxShadow: '0.5em 1em 1em rgb(64, 64, 70)',
     width: '80%',
-    [theme.breakpoints.down('sm')]: {
-      margin: '0 auto !important',
+    [theme.breakpoints.down('md')]: {
       width: '50%',
+      margin: '0 auto',
+      marginBottom: '30px',
     },
     [theme.breakpoints.down('sm')]: {
-      margin: '0 auto !important',
       width: '100%',
       height: '350px',
-      marginBottom: '30px',
     },
   },
   genresContainer: {
-    margin: '10px 0 !imaportant',
+    margin: '10px 0 !important',
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
