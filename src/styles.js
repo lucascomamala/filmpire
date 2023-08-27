@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     height: "100%",
   },
-  toolbar: {
+  app_toolbar: {
     height: '70px',
   },
   content: {
