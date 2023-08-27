@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
     margin: '10px 0 !important',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
       flexWrap: 'wrap',
     },
@@ -14,12 +14,12 @@ export default makeStyles((theme) => ({
     borderRadius: '20px',
     boxShadow: '0.5em 1em 1em rgb(64, 64, 70)',
     width: '80%',
-    [theme.breakpoints.down('md')]: {
-      margin: '0 auto !imporatant',
+    [theme.breakpoints.down('sm')]: {
+      margin: '0 auto !important',
       width: '50%',
     },
     [theme.breakpoints.down('sm')]: {
-      margin: '0 auto !imporatant',
+      margin: '0 auto !important',
       width: '100%',
       height: '350px',
       marginBottom: '30px',

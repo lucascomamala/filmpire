@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
-import useStyles from '../movies/styles';
+import useStyles from './styles';
 // import { MovieList } from '../index';
 import { useGetMovieQuery, useGetRecommendationsQuery, useGetListQuery } from '../../services/TMDB';
 import { selectGenreOrCategory } from '../../state/currentGenreOrCategory';
@@ -16,21 +16,21 @@ const MovieInformation = () => {
   const { data, error, isLoading } = useGetMovieQuery(id);
   const classes = useStyles();
 
-  if(isLoading) return (
+  if (isLoading) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <CircularProgress size='8rem' />
     </Box>
   )
 
-  if(error) return (
+  if (error) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <Link to='/'>Something has gone wrong: {error}</Link>
     </Box>
   )
-  
+
   return (
     <Grid container className={classes.containerSpaceAround}>
-      <Grid item sm={12} lg={4} align="center">
+      <Grid item md={12} lg={4} align="center">
         <img
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
           className={classes.poster}
@@ -52,6 +52,19 @@ const MovieInformation = () => {
             </Typography>
           </Box>
           <Typography gutterBottom variant="h6" align="center">{data?.runtime}min</Typography>
+        </Grid>
+        <Grid item className={classes.genresContainer}>
+          {data?.genres?.map((genre) => (
+            <Link
+              className={classes.links}
+              key={genre.name}
+              to="/"
+              onClick={() => { }}
+            >
+              <img src={genreIcons[genre.name.toLowerCase()]} className={classes.genreImage} height={30} />
+              <Typography color="textPrimary" variant="subtitle1">{genre?.name}</Typography>
+            </Link>
+          ))}
         </Grid>
       </Grid>
     </Grid>
