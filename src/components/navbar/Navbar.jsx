@@ -6,9 +6,10 @@ import { useTheme } from "@mui/material/styles"
 import { useDispatch, useSelector } from "react-redux"
 
 import useStyles from "./styles"
-import { Search, Sidebar } from "./index"
-import { fetchToken, createSessionId, moviesAPI } from "../utils"
-import { setUser, userSelector } from "../utils/auth"
+import Sidebar from "../sidebar/Sidebar"
+import Search from "../search/Search"
+import { fetchToken, createSessionId, moviesAPI } from "../../utils"
+import { setUser, userSelector } from "../../utils/auth"
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)

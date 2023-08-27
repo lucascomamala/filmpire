@@ -5,9 +5,9 @@ import { useTheme } from "@mui/styles"
 import { useDispatch, useSelector } from "react-redux"
 
 import useStyles from "./styles"
-import genreIcons from "../assets/genres"
-import { useGetGenresQuery } from "../services/TMDB"
-import { selectGenreOrCategory } from "../state/currentGenreOrCategory"
+import genreIcons from "../../assets/genres"
+import { useGetGenresQuery } from "../../services/TMDB"
+import { selectGenreOrCategory } from "../../state/currentGenreOrCategory"
 
 const categories = [
   { label: 'Popular', value: 'popular' },

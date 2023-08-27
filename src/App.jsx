@@ -3,8 +3,12 @@ import { Route, Routes } from "react-router-dom"
 
 import useStyles from "./styles"
 
-import { Actors, Movies, MovieInformation, Profile } from "./pages/index"
-import { Navbar } from "./components/index"
+import Movies from './pages/movies/index'
+import MovieInformation from "./pages/movie_information/show"
+import Actors from "./pages/actors/index"
+import Profile from "./pages/profile/index"
+
+import Navbar from "./components/navbar/Navbar"
 
 
 const App = () => {
@@ -18,8 +22,8 @@ const App = () => {
         <div className={classes.toolbar} />
         <Routes>
           <Route path="/" element={<Movies />} />
-          <Route path="/actors/:id" element={<Actors />} />
           <Route path="/movies/:id" element={<MovieInformation />} />
+          <Route path="/actors/:id" element={<Actors />} />
           <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </main>
