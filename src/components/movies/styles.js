@@ -5,9 +5,11 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    overflow: "auto",
+    overflowY: "auto",
+    overflowX: "hidden",
     [theme.breakpoints.down("md")]: {
       justifyContent: "center",
+      overflowX: 'auto',
     },
   },
   movie: {

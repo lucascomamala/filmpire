@@ -19,7 +19,7 @@ const MovieInformation = () => {
     data: recommendations,
     error: recommendationsError,
     isLoading: isRecommendationsLoading
-  } = useGetRecommendationsQuery({ id, list: '/recommendations' });
+  } = useGetRecommendationsQuery({ id, list: 'similar' });
 
   const classes = useStyles();
   const dispatch = useDispatch()
