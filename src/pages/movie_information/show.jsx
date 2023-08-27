@@ -6,22 +6,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import useStyles from './styles';
-// import { MovieList } from '../index';
+import MovieList from '../../components/movies/MovieList'
 import { useGetMovieQuery, useGetRecommendationsQuery, useGetListQuery } from '../../services/TMDB';
 import { selectGenreOrCategory } from '../../state/currentGenreOrCategory';
 import genreIcons from '../../assets/genres';
 
 const MovieInformation = () => {
   const { id } = useParams();
+
   const { data, error, isLoading } = useGetMovieQuery(id);
+  const {
+    data: recommendations,
+    error: recommendationsError,
+    isLoading: isRecommendationsLoading
+  } = useGetRecommendationsQuery({ id, list: '/recommendations' });
+
   const classes = useStyles();
   const dispatch = useDispatch()
 
   const isMovieFavorited = true
   const isMovieWatchlisted = true
 
-  const addToFavorites = () => {}
-  const addToWatchList = () => {}
+  const addToFavorites = () => { }
+  const addToWatchList = () => { }
 
   if (isLoading) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
@@ -108,7 +115,7 @@ const MovieInformation = () => {
               <ButtonGroup size="small" variant="outlined">
                 <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>Website</Button>
                 <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>IMDB</Button>
-                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>Trailer</Button>
+                <Button onClick={() => { }} href="#" endIcon={<Theaters />}>Trailer</Button>
               </ButtonGroup>
             </Grid>
             <Grid item xs={12} sm={6} className={classes.buttonContainer}>
@@ -135,7 +142,8 @@ const MovieInformation = () => {
         </Typography>
         {recommendations
           ? <MovieList movies={recommendations} numberOfMovies={12} />
-          : <Box>Sorry, nothing was found.</Box>}
+          : <Box>Sorry, nothing was found.</Box>
+        }
       </Box>
     </Grid>
   )
