@@ -11,12 +11,16 @@ import { useGetMovieQuery, useGetRecommendationsQuery, useGetListQuery } from '.
 import { selectGenreOrCategory } from '../../state/currentGenreOrCategory';
 import genreIcons from '../../assets/genres';
 import Pagination from '../../components/pagination/Pagination';
+import { userSelector } from '../../utils/auth';
 
 const MovieInformation = () => {
 
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(1)
+  const [isMovieFavorited, setIsMovieFavorited] = useState(false)
+  const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false)
 
+  const { user } = useSelector(userSelector)
   const { id } = useParams();
   const { data, error, isLoading } = useGetMovieQuery(id);
   const {
@@ -24,18 +28,32 @@ const MovieInformation = () => {
     error: recommendationsError,
     isLoading: isRecommendationsLoading
   } = useGetRecommendationsQuery({ id, list: 'recommendations', page });
-  
+
   const langCode = data?.original_language
   const lang = data?.spoken_languages?.find((lang) => lang.iso_639_1 === langCode)?.english_name
 
   const classes = useStyles();
   const dispatch = useDispatch()
 
-  const isMovieFavorited = true
-  const isMovieWatchlisted = true
+  const addToFavorites = async () => {
+    await axios.post(`https:///api.themoviedb.org/3/account/${user.id}/favorite?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${localStorage.getItem('session_id')}`, {
+      media_type: 'movie',
+      media_id: id,
+      favorite: !isMovieFavorited
+    })
 
-  const addToFavorites = () => { }
-  const addToWatchList = () => { }
+    setIsMovieFavorited((prev) => !prev)
+  }
+  
+  const addToWatchList = async () => {
+    await axios.post(`https:///api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${localStorage.getItem('session_id')}`, {
+      media_type: 'movie',
+      media_id: id,
+      favorite: !isMovieWatchlisted
+    })
+
+    setIsMovieWatchlisted((prev) => !prev)
+  }
 
   if (isLoading) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
@@ -73,7 +91,7 @@ const MovieInformation = () => {
             </Typography>
           </Box>
           <Typography gutterBottom variant="h6" align="center">
-            {data?.runtime} min | Language: <span style={{fontWeight: 'normal'}}>{lang}</span>
+            {data?.runtime} min | Language: <span style={{ fontWeight: 'normal' }}>{lang}</span>
           </Typography>
         </Grid>
         <Grid item className={classes.genresContainer}>
@@ -147,9 +165,9 @@ const MovieInformation = () => {
         {isRecommendationsLoading && <CircularProgress size='8rem' />}
         {recommendations
           ? <>
-              <MovieList movies={recommendations} numberOfMovies={12} />
-              <Pagination currentPage={page} setPage={setPage} totalPages={recommendations?.total_pages} />
-            </>
+            <MovieList movies={recommendations} numberOfMovies={12} />
+            <Pagination currentPage={page} setPage={setPage} totalPages={recommendations?.total_pages} />
+          </>
           : <Box>Sorry, nothing was found.</Box>
         }
       </Box>
