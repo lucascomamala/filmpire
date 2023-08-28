@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 
 import MovieList from '../../components/movies/MovieList'
 import { useGetMoviesQuery } from "../../services/TMDB"
+import Pagination from "../../components/pagination/Pagination"
 
 const Movies = () => {
   const [page, setPage] = useState(1)
@@ -29,7 +30,10 @@ const Movies = () => {
   )
 
   return (
-    <MovieList movies={data} />
+    <>
+      <MovieList movies={data} />
+      <Pagination />
+    </>
   )
 }
 
