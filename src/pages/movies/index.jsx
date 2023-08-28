@@ -32,7 +32,7 @@ const Movies = () => {
   return (
     <>
       <MovieList movies={data} />
-      <Pagination />
+      <Pagination currentPage={page} setPage={setPage} totalPages={data.total_pages} />
     </>
   )
 }

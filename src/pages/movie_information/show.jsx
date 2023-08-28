@@ -10,8 +10,12 @@ import MovieList from '../../components/movies/MovieList'
 import { useGetMovieQuery, useGetRecommendationsQuery, useGetListQuery } from '../../services/TMDB';
 import { selectGenreOrCategory } from '../../state/currentGenreOrCategory';
 import genreIcons from '../../assets/genres';
+import Pagination from '../../components/pagination/Pagination';
 
 const MovieInformation = () => {
+
+  const [open, setOpen] = useState(false)
+  const [page, setPage] = useState(1)
 
   const { id } = useParams();
   const { data, error, isLoading } = useGetMovieQuery(id);
@@ -19,9 +23,8 @@ const MovieInformation = () => {
     data: recommendations,
     error: recommendationsError,
     isLoading: isRecommendationsLoading
-  } = useGetRecommendationsQuery({ id, list: 'similar' });
-
-  const [open, setOpen] = useState(false)
+  } = useGetRecommendationsQuery({ id, list: 'recommendations', page });
+  console.log(recommendations)
 
   const classes = useStyles();
   const dispatch = useDispatch()
@@ -38,7 +41,7 @@ const MovieInformation = () => {
     </Box>
   )
 
-  if (error) return (
+  if (error || recommendationsError) return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <Link to='/'>Something has gone wrong: {error}</Link>
     </Box>
@@ -137,8 +140,12 @@ const MovieInformation = () => {
         <Typography variant="h3" gutterBottom align="center">
           You might also like
         </Typography>
+        {isRecommendationsLoading && <CircularProgress size='8rem' />}
         {recommendations
-          ? <MovieList movies={recommendations} numberOfMovies={12} />
+          ? <>
+              <MovieList movies={recommendations} numberOfMovies={12} />
+              <Pagination currentPage={page} setPage={setPage} totalPages={recommendations?.total_pages} />
+            </>
           : <Box>Sorry, nothing was found.</Box>
         }
       </Box>

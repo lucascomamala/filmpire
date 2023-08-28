@@ -6,14 +6,14 @@ import { ArrowBack } from "@mui/icons-material";
 import useStyles from './styles';
 import MovieList from "../../components/movies/MovieList";
 import { useGetActorQuery, useGetActorRecommendationsQuery } from "../../services/TMDB"
+import Pagination from "../../components/pagination/Pagination";
 
 const Actors = () => {
   const { id } = useParams()
-  const page=1
+  const [page, setPage] = useState(1)
+  
   const { data, error, isLoading } = useGetActorQuery(id)
-  const { data: recommendations } = useGetActorRecommendationsQuery({ id, page: 1 })
-  console.log(data)
-  console.log(recommendations)
+  const { data: recommendations } = useGetActorRecommendationsQuery({ id, page })
   
   const classes = useStyles()
 
@@ -60,6 +60,7 @@ const Actors = () => {
       <Box margin='2rem 0'>
         <Typography variant='h2' align='center' gutterBottom>Movies</Typography>
         {recommendations?.results?.length > 0 && <MovieList movies={recommendations} numberOfMovies={12} />}
+        <Pagination currentPage={page} setPage={setPage} totalPages={recommendations?.total_pages} />
       </Box>
     </>
   )
