@@ -5,12 +5,18 @@ import { ExitToApp } from "@mui/icons-material"
 import { userSelector } from "../../utils/auth"
 import { useGetListQuery } from "../../services/TMDB"
 import RatedCards from "../../components/rated_cards/RatedCards"
+import { useEffect } from "react"
 
 const Profile = () => {
   const { user } = useSelector(userSelector)
 
-  const { data: favoriteMovies } = useGetListQuery({ accountId: user.id, sessionId: localStorage.getItem('session_id'), listName: 'favorite/movies', page: 1 })
-  const { data: watchlistMovies } = useGetListQuery({ accountId: user.id, sessionId: localStorage.getItem('session_id'), listName: 'watchlist/movies', page: 1 })
+  const { data: favoriteMovies, refetch: refetchFavorites } = useGetListQuery({ accountId: user.id, sessionId: localStorage.getItem('session_id'), listName: 'favorite/movies', page: 1 })
+  const { data: watchlistMovies, refetch: refetchWatchlist } = useGetListQuery({ accountId: user.id, sessionId: localStorage.getItem('session_id'), listName: 'watchlist/movies', page: 1 })
+
+  useEffect(() => {
+    refetchFavorites()
+    refetchWatchlist()
+  }, [])
 
   const logout = () => {
     localStorage.clear()
