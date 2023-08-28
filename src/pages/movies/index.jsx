@@ -11,6 +11,17 @@ const Movies = () => {
   const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory)
   const { data, error, isLoading } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery })
 
+  const sm = useMediaQuery((theme) => theme.breakpoints.only("sm"))
+  const md = useMediaQuery((theme) => theme.breakpoints.only("md"))
+  const lg = useMediaQuery((theme) => theme.breakpoints.only("lg"))
+  const xl = useMediaQuery((theme) => theme.breakpoints.only("xl"))
+  let numberOfMovies = 8
+  if (sm) numberOfMovies = 16
+  if (md) numberOfMovies = 20
+  if (lg) numberOfMovies = 20
+  if (xl) numberOfMovies = 18
+
+
   if(isLoading) return (
     <Box display='flex' justifyContent='center'>
       <CircularProgress size='4rem' />
@@ -31,7 +42,7 @@ const Movies = () => {
 
   return (
     <>
-      <MovieList movies={data} />
+      <MovieList movies={data} numberOfMovies={numberOfMovies} />
       <Pagination currentPage={page} setPage={setPage} totalPages={data.total_pages} />
     </>
   )
