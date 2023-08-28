@@ -42,7 +42,7 @@ export const tmdbApi = createApi({
     }),
     // Get Actor by ID
     getActor: builder.query({
-      query: (id) => `/person/${id}?append_to_response=movie_credits&api_key=${tmdbApiKey}`,
+      query: (id) => `/person/${id}?append_to_response=movie_credits,images&api_key=${tmdbApiKey}`,
     }),
   }),
 })

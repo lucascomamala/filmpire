@@ -1,15 +1,57 @@
-import { useParams } from "react-router-dom"
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom"
+import { Box, CircularProgress, Button, Grid, Typography } from "@mui/material"
+import { ArrowBack } from "@mui/icons-material";
 
+import useStyles from './styles';
 import { useGetActorQuery } from "../../services/TMDB"
 
 const Actors = () => {
   const { id } = useParams()
   const { data, error, isLoading } = useGetActorQuery(id)
   console.log(data)
+  
+  const classes = useStyles()
+
+  if (isLoading) return (
+    <Box display='flex' justifyContent='center'>
+      <CircularProgress size='8rem' />
+    </Box>
+  )
+
+  if (error) return (
+    <Box display='flex' justifyContent='center' alignItems='center'>
+      <Link to='/'>Something has gone wrong: {error}</Link>
+    </Box>
+  )
 
 
   return (
-    <div>Actors</div>
+    <Grid container spacing={3}>
+      <Grid item sm={12} md={4} align="center">
+        <img
+          src={`https://image.tmdb.org/t/p/w780/${data?.images?.profiles[0]?.file_path}`}
+          className={classes.image}
+          alt={data?.name}
+        />
+      </Grid>
+      <Grid item container direction="column" md={7}>
+        <Typography variant="h2" align="center" gutterBottom>
+          {data?.name}
+        </Typography>
+        <Typography variant="h5" align="center" gutterBottom>
+          Born {new Date(data?.birthday).toDateString()}
+        </Typography>
+        <Typography variant="body1" align="center" gutterBottom>
+          {data?.biography || 'No biography available.'}
+        </Typography>
+        <Box item marginTop="2rem" display="flex" justifyContent="space-around">
+          <Button variant="contained" color="primary" target="_blank" href={`https://www.imdb.com/name/${data?.imdb_id}`}>
+            IMDB
+          </Button>
+        </Box>
+      </Grid>
+    </Grid>
   )
 }
 
