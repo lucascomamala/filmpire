@@ -6,7 +6,7 @@ import useStyles from "./styles"
 import Movies from './pages/movies/index'
 import MovieInformation from "./pages/movie_information/show"
 import Actors from "./pages/actors/show"
-import Profile from "./pages/profile/index"
+import Profile from "./pages/profile/show"
 
 import Navbar from "./components/navbar/Navbar"
 
