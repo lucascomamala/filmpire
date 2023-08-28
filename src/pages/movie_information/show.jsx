@@ -24,7 +24,9 @@ const MovieInformation = () => {
     error: recommendationsError,
     isLoading: isRecommendationsLoading
   } = useGetRecommendationsQuery({ id, list: 'recommendations', page });
-  console.log(recommendations)
+  
+  const langCode = data?.original_language
+  const lang = data?.spoken_languages?.find((lang) => lang.iso_639_1 === langCode)?.english_name
 
   const classes = useStyles();
   const dispatch = useDispatch()
@@ -70,7 +72,9 @@ const MovieInformation = () => {
               {data?.vote_average} / 10
             </Typography>
           </Box>
-          <Typography gutterBottom variant="h6" align="center">{data?.runtime}min</Typography>
+          <Typography gutterBottom variant="h6" align="center">
+            {data?.runtime} min | Language: <span style={{fontWeight: 'normal'}}>{lang}</span>
+          </Typography>
         </Grid>
         <Grid item className={classes.genresContainer}>
           {data?.genres?.map((genre) => (
