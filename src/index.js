@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Provider } from 'react-redux';
 
+import './index.css';
 import App from "./App";
 import store from './state/store';
 
