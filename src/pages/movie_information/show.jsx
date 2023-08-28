@@ -128,11 +128,6 @@ const MovieInformation = () => {
                 <Button onClick={addToWatchList} endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}>
                   Watchlist
                 </Button>
-                <Button endIcon={<ArrowBack />} sx={{ borderColor: 'primary.main' }}>
-                  <Typography variant="subtitle2" component={Link} to="/" color="inherit" sx={{ textDecoration: 'none' }}>
-                    Back
-                  </Typography>
-                </Button>
               </ButtonGroup>
             </Grid>
           </div>

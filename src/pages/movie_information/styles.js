@@ -51,7 +51,7 @@ export default makeStyles((theme) => ({
   },
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     width: '100%',
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
