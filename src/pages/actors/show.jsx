@@ -33,7 +33,7 @@ const Actors = () => {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item sm={12} md={4} align="center">
+        <Grid item xs={12} md={4} align="center">
           <img
             src={`https://image.tmdb.org/t/p/w780/${data?.images?.profiles[0]?.file_path}`}
             className={classes.image}
