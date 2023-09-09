@@ -48,7 +48,7 @@ const Sidebar = () => {
           >
             <ListItemButton onClick={() => dispatch(selectGenreOrCategory(value))}>
               <ListItemIcon>
-                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImage} height={30} />
+                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImage} height={30} alt='category' />
               </ListItemIcon>
               <ListItemText primary={label} />
             </ListItemButton>
@@ -70,7 +70,7 @@ const Sidebar = () => {
           >
             <ListItemButton onClick={() => dispatch(selectGenreOrCategory(id))}>
               <ListItemIcon>
-                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} />
+                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} alt='genre' />
               </ListItemIcon>
               <ListItemText primary={name} />
             </ListItemButton>
