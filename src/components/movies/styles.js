@@ -44,4 +44,40 @@ export default makeStyles((theme) => ({
       transform: 'scale(1.05)',
     },
   },
+  featuredCardContainer: {
+    marginBottom: '20px',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    height: '490px',
+    textDecoration: 'none',
+  },
+  card: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+  },
+  cardRoot: {
+    position: 'relative',
+  },
+  cardMedia: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.575)',
+    backgroundBlendMode: 'darken',
+  },
+  cardContent: {
+    color: 'white',
+    width: '40%',
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+    },
+  },
+  cardContentRoot: {
+    position: 'relative',
+    backgroundColor:'transparent',
+  },
 }));
