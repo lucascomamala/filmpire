@@ -1,8 +1,7 @@
-import { useEffect } from "react"
-import { Divider, List, ListItem, ListSubheader, ListItemText, ListItemIcon, ListItemButton, Box, CircularProgress } from "@mui/material"
+import { Divider, List, ListSubheader, ListItemText, ListItemIcon, ListItemButton, Box, CircularProgress } from "@mui/material"
 import { Link } from "react-router-dom"
 import { useTheme } from "@mui/styles"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
 import useStyles from "./styles"
 import genreIcons from "../../assets/genres"
@@ -23,7 +22,7 @@ const Sidebar = () => {
   const classes = useStyles()
   const { data, isLoading } = useGetGenresQuery()
   const dispatch = useDispatch()
-  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory)
+  // const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory)
 
   return (
     <>
