@@ -1,7 +1,8 @@
+import { useEffect } from "react"
 import { Divider, List, ListSubheader, ListItemText, ListItemIcon, ListItemButton, Box, CircularProgress } from "@mui/material"
 import { Link } from "react-router-dom"
 import { useTheme } from "@mui/styles"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import useStyles from "./styles"
 import genreIcons from "../../assets/genres"
@@ -17,12 +18,16 @@ const categories = [
 const redLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
 const blueLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
 
-const Sidebar = () => {
+const Sidebar = ({ setMobileOpen }) => {
   const theme = useTheme()
   const classes = useStyles()
   const { data, isLoading } = useGetGenresQuery()
   const dispatch = useDispatch()
-  // const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory)
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory)
+
+  useEffect(() => { 
+    setMobileOpen(false)
+  }, [genreIdOrCategoryName, setMobileOpen])
 
   return (
     <>
