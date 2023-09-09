@@ -3,6 +3,8 @@ import alanBtn from '@alan-ai/alan-sdk-web';
 
 import {ColorModeContext} from '../utils/ToggleColorMode';
 
+import { fetchToken } from "../utils"
+
 const useAlan = () => {
   const { setMode } = useContext(ColorModeContext)
 
@@ -16,6 +18,14 @@ const useAlan = () => {
           else
             setMode('dark')
         }
+        else if (command == 'login') {
+          fetchToken()
+        }
+        else if (command == 'logout') {
+          localStorage.clear('')
+          window.location.href = '/'
+        }
+
       }
     });
   }, [setMode]);
